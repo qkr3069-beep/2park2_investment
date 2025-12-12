@@ -72,9 +72,18 @@
     <!-- 상단 로고 + 타이틀 + 날짜 -->
     <div class="flex flex-col lg:flex-row lg:justify-between gap-4">
       <div class="flex flex-col items-start gap-0 text-left">
-        <a href="https://qkr3069-beep.github.io/2park2_investment/">
-  <img src="2park2 investment_logo.png"
-       alt="이박이 인베스트먼트 로고" class="h-16 object-contain cursor-pointer" />
+        <a href="index.html" class="block">
+  <img
+    src="2park2 investment_logo.png"
+    alt="이박이 인베스트먼트 로고"
+    class="
+      h-24        /* 기본 96px → 기존 대비 약 4배 확대 */
+      md:h-28    /* 태블릿에서 더 크게 */
+      lg:h-32    /* 데스크탑에서 더 크게 */
+      object-contain 
+      cursor-pointer
+    "
+  />
 </a>
 
         <div class="flex gap-3 items-center flex-wrap mt-1">
