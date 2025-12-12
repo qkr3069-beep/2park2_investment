@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>선 매니저 뉴스 브리핑</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind + Pretendard -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
+
+  <style>
+    :root{
+      --brand-primary:#0f3a3a;
+      --brand-primary-700:#0a2b2b;
+      --brand-primary-50:#f7f4ef;
+      --brand-text:#0f3a3a;
+      --brand-muted:#4b5e5e;
+      --brand-card:#ffffff;
+      --brand-divider:#e5e1d8;
+      --brand-radius:14px;
+      --brand-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+    body{
+      background:var(--brand-primary-50);
+      font-family:"Pretendard Variable",Pretendard,sans-serif;
+    }
+    .brand-header{ background:#F7F3ED; }
+    .brand-card{
+      background:var(--brand-card);
+      border-radius:var(--brand-radius);
+      box-shadow:var(--brand-shadow);
+      border:1px solid #11182720;
+    }
+    .brand-section-title{
+      font-weight:800;
+      border-left:6px solid var(--brand-primary);
+      padding-left:10px;
+    }
+    .brand-link{
+      color:#22c55e;
+      font-weight:700;
+    }
+    .brand-divider{ border-top:1px dashed var(--brand-divider); }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="brand-header">
+  <div class="max-w-6xl mx-auto px-5 py-5 flex flex-col md:flex-row md:justify-between gap-4">
+
+    <div class="flex flex-col items-start">
+      <a href="index.html">
+  <img src="2park2 investment_logo.png"
+       alt="이박이 인베스트먼트 로고" class="h-16 object-contain cursor-pointer" />
+</a>
+
+
+      <h1 class="text-xl lg:text-2xl font-extrabold text-[#0A3A32] mt-2">
+        선 매니저 뉴스 브리핑
+      </h1>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <input type="date" id="datePicker"
+        class="px-3 py-2 rounded-xl bg-white text-black" />
+      <button onclick="loadAll()"
+        class="px-4 py-2 bg-[var(--brand-primary)] text-white rounded-xl font-bold">
+        조회
+      </button>
+    </div>
+  </div>
+</header>
+<!-- 🔥 상단 종목 차트 영역 -->
+<section class="max-w-6xl mx-auto px-5 mt-6">
+  <h2 class="text-xl font-extrabold text-[var(--brand-primary)] mb-3">
+    📈 선 매니저 주요 종목 차트
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+    <!-- Intuitive Machines -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">Intuitive Machines (LUNR)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_lunr
+      &symbol=NASDAQ%3ALUNR&interval=60&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=&details=1&studies=[]"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+    <!-- Tesla -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">Tesla (TSLA)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NASDAQ%3ATSLA&interval=60&hidesidetoolbar=1&details=1"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+    <!-- NVIDIA -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">NVIDIA (NVDA)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NASDAQ%3ANVDA&interval=60&hidesidetoolbar=1&details=1"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+    <!-- UnitedHealth -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">UnitedHealth (UNH)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NYSE%3AUNH&interval=60&hidesidetoolbar=1&details=1"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+    <!-- IonQ -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">IonQ (IONQ)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NYSE%3AIONQ&interval=60&hidesidetoolbar=1&details=1"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+    <!-- NuScale Power -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">NuScale Power (SMR)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NYSE%3ASMR&interval=60&hidesidetoolbar=1&details=1"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+    <!-- Bitcoin -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">Bitcoin (BTC/USD)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=CRYPTO%3ABTCUSD&interval=60&hidesidetoolbar=1&details=1"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+    <!-- Alphabet A -->
+    <div class="brand-card p-3">
+      <h3 class="font-bold mb-2 text-[var(--brand-text)]">Alphabet A (GOOGL)</h3>
+      <iframe src="https://s.tradingview.com/widgetembed/?symbol=NASDAQ%3AGOOGL&interval=60&hidesidetoolbar=1&details=1"
+      style="width:100%; height:260px;" frameborder="0"></iframe>
+    </div>
+
+  </div>
+</section>
+
+<main class="max-w-6xl mx-auto px-5 py-6 space-y-8">
+  <div id="news-container" class="space-y-10"></div>
+</main>
+
+<script>
+/* 🔥 선 매니저 키워드 리스트 */
+const KEYWORDS = [
+  "Intuitive Machines",
+  "Tesla",
+  "NVIDIA",
+  "UnitedHealth",
+  "IonQ",
+  "NuScale Power",
+  "Bitcoin",
+  "Alphabet A"
+];
+
+/* 🔥 각 키워드 → RSS URL 만들기 */
+function makeFeed(keyword){
+  return (
+    "https://news.google.com/rss/search?q=" +
+    encodeURIComponent(`"${keyword}"`) +
+    "&hl=en-US&gl=US&ceid=US:en"
+  );
+}
+
+/* 날짜 처리 */
+function parseYMD(v){
+  const[a,b,c]=v.split("-").map(Number);
+  return new Date(a,b-1,c);
+}
+function isSameDate(pub,selected){
+  return Math.abs((new Date(pub)-parseYMD(selected))/86400000) <= 1;
+}
+
+/* RSS JSON 변환 */
+async function fetchRSS(url){
+  const r = await fetch(
+    "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(url)
+  );
+  return r.json();
+}
+
+/* 🔥 기사 섹션 렌더 */
+function renderKeywordSection(container, keyword, items, selDate){
+  const sec = document.createElement("section");
+
+  sec.innerHTML = `
+    <h2 class="brand-section-title text-xl mb-3">${keyword}</h2>
+  `;
+
+  let count = 0;
+
+  for(const it of items){
+    if(count >= 5) break;
+    if(!isSameDate(it.pubDate, selDate)) continue;
+
+    const text = (it.description || "").replace(/<[^>]+>/g," ").slice(0,70);
+
+    sec.innerHTML += `
+      <div class="brand-card p-4 mb-3">
+        <a class="brand-link block mb-1" href="${it.link}" target="_blank">
+          ${it.title}
+        </a>
+        <p class="text-sm text-[var(--brand-muted)]">${text}...</p>
+      </div>
+    `;
+
+    count++;
+  }
+
+  if(count === 0){
+    sec.innerHTML += `<p class="text-[var(--brand-muted)]">해당 날짜 소식 없음</p>`;
+  }
+
+  sec.innerHTML += `<div class="brand-divider mt-4"></div>`;
+  container.appendChild(sec);
+}
+
+/* 🔥 전체 로드 */
+async function loadAll(){
+  const selDate = document.getElementById("datePicker").value;
+  const container = document.getElementById("news-container");
+  container.innerHTML = "";
+
+  for(const keyword of KEYWORDS){
+    const url = makeFeed(keyword);
+    const data = await fetchRSS(url);
+    const items = data.items || [];
+
+    renderKeywordSection(container, keyword, items, selDate);
+  }
+}
+
+/* 페이지 로드 시 오늘 날짜 자동 설정 */
+window.onload = ()=>{
+  document.getElementById("datePicker").value =
+    new Date().toISOString().slice(0,10);
+  loadAll();
+};
+</script>
+
+</body>
+</html>
