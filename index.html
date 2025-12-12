@@ -7,26 +7,26 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
   <style>
-   :root{
-  --brand-primary:#0f3a3a;        /* 딥 틸 메인 컬러 */
-  --brand-primary-700:#0a2b2b;    /* hover용 어두운 딥 틸 */
-  --brand-primary-50:#f7f4ef;     /* 전체 배경 (아이보리/크림색) */
+    :root{
+      --brand-primary:#0f3a3a;        /* 딥 틸 메인 컬러 */
+      --brand-primary-700:#0a2b2b;    /* hover용 어두운 딥 틸 */
+      --brand-primary-50:#f7f4ef;     /* 전체 배경 (아이보리/크림색) */
 
-  --brand-text:#0f3a3a;           /* 기본 텍스트 */
-  --brand-muted:#4b5e5e;          /* 보조 텍스트 */
+      --brand-text:#0f3a3a;           /* 기본 텍스트 */
+      --brand-muted:#4b5e5e;          /* 보조 텍스트 */
 
-  --brand-card:#ffffff;           /* 카드 배경 */
-  --brand-divider:#e5e1d8;        /* 카드 구분선 */
+      --brand-card:#ffffff;           /* 카드 배경 */
+      --brand-divider:#e5e1d8;        /* 카드 구분선 */
 
-  --brand-radius:14px;
-  --brand-shadow:0 6px 18px rgba(0,0,0,0.08);
-}
+      --brand-radius:14px;
+      --brand-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
     html,body{
       font-family:"Pretendard Variable",Pretendard,sans-serif;
     }
-   .brand-header{
-  background:#F7F3ED; /* 아이보리 배경 */
-}
+    .brand-header{
+      background:#F7F3ED; /* 아이보리 배경 */
+    }
     .brand-btn{
       background:var(--brand-primary);
       color:#f9fafb;
@@ -35,10 +35,10 @@
       font-weight:700;
     }
     .brand-section-title{
-  font-weight:800;
-  border-left:6px solid var(--brand-primary);
-  padding-left:10px;
-}
+      font-weight:800;
+      border-left:6px solid var(--brand-primary);
+      padding-left:10px;
+    }
     .brand-card{
       background:var(--brand-card);
       border-radius:var(--brand-radius);
@@ -65,28 +65,65 @@
 </head>
 <body class="bg-[var(--brand-primary-50)] text-[var(--brand-text)] min-h-screen">
 
+<!-- HEADER -->
 <header class="brand-header text-white">
-  <div class="max-w-6xl mx-auto px-5 py-5 flex flex-col lg:flex-row lg:justify-between gap-4">
-    <div class="flex flex-col items-start gap-0 text-left">
-      <img src="2park2 investment_logo.png"
-           alt="이박이 인베스트먼트 로고" class="h-16 object-contain" />
-      <div class="flex gap-3 items-center flex-wrap mt-1">
-	<h1 class="text-xl lg:text-2xl font-extrabold text-[#0A3A32]">이박이 인베스트먼트 뉴스 브리핑</h1>
-        <a href="https://www.korea.kr/" target="_blank" rel="noopener" class="badge-link text-white font-bold text-sm">
-          정책브리핑 바로가기
-        </a>
+  <div class="max-w-6xl mx-auto px-5 py-5 flex flex-col gap-4">
+
+    <!-- 상단 로고 + 타이틀 + 날짜 -->
+    <div class="flex flex-col lg:flex-row lg:justify-between gap-4">
+      <div class="flex flex-col items-start gap-0 text-left">
+        <a href="https://qkr3069-beep.github.io/2park2_investment/">
+  <img src="2park2 investment_logo.png"
+       alt="이박이 인베스트먼트 로고" class="h-16 object-contain cursor-pointer" />
+</a>
+
+        <div class="flex gap-3 items-center flex-wrap mt-1">
+          <h1 class="text-xl lg:text-2xl font-extrabold text-[#0A3A32]">
+            이박이 인베스트먼트 뉴스 브리핑
+          </h1>
+          <a href="https://www.korea.kr/" target="_blank" rel="noopener"
+             class="badge-link text-white font-bold text-sm">
+            정책브리핑 바로가기
+          </a>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <input type="date" id="datePicker"
+               class="px-3 py-2 rounded-xl bg-white text-black" />
+        <button onclick="loadAllNews()"
+                class="brand-btn hover:bg-[var(--brand-primary-700)] transition">
+          조회
+        </button>
       </div>
     </div>
-    <div class="flex items-center gap-3">
-      <input type="date" id="datePicker" class="px-3 py-2 rounded-xl bg-white text-black" />
-      <button onclick="loadAllNews()" class="brand-btn hover:bg-[var(--brand-primary-700)] transition">
-        조회
-      </button>
+
+    <!-- 🔗 매니저 개별 페이지 이동 버튼 -->
+    <div class="flex flex-wrap gap-3 mt-1">
+      <!-- 파일 이름은 실제 만든 페이지에 맞게 수정해서 사용 -->
+      <a href="sun_manager.html"
+         class="px-4 py-2 rounded-full bg-white text-[var(--brand-primary)]
+                font-semibold text-sm shadow hover:bg-[#e6f3f1] transition">
+        선 매니저 페이지 →
+      </a>
+      <a href="hong_manager.html"
+         class="px-4 py-2 rounded-full bg-white text-[var(--brand-primary)]
+                font-semibold text-sm shadow hover:bg-[#e6f3f1] transition">
+        홍 매니저 페이지 →
+      </a>
+      <a href="dong_manager.html"
+         class="px-4 py-2 rounded-full bg-white text-[var(--brand-primary)]
+                font-semibold text-sm shadow hover:bg-[#e6f3f1] transition">
+        동 매니저 페이지 →
+      </a>
     </div>
+
   </div>
 </header>
 
-<main class="max-w-6xl mx-auto px-5 py-4 space-y-5">
+<main class="max-w-6xl mx-auto px-5 py-4 space-y-6">
+
+  <!-- 📊 주요 시장 차트 -->
   <section id="market-charts" class="space-y-4 mb-4">
     <h2 class="brand-section-title text-xl">주요 시장 차트</h2>
 
@@ -105,19 +142,19 @@
         </iframe>
       </div>
 
-	<!-- 금 차트 -->
-	<div class="brand-card p-3">
-  	<h3 class="font-bold mb-2 text-sm text-[var(--brand-muted)]">
-    	금 시세 (XAU/USD)
-  	</h3>
-  	<iframe
-    	src="https://s.tradingview.com/widgetembed/?symbol=FX_IDC%3AXAUUSD&interval=D&theme=light&style=1&locale=kr&toolbarbg=f1f3f6&hidetoptoolbar=1&hidesidetoolbar=1&hidelegend=1"
-    	style="width:100%;height:260px;"
-    	frameborder="0"
-    	allowtransparency="true"
-    	scrolling="no">
-  	</iframe>
-	</div>
+      <!-- 금 시세 -->
+      <div class="brand-card p-3">
+        <h3 class="font-bold mb-2 text-sm text-[var(--brand-muted)]">
+          금 시세 (XAU/USD)
+        </h3>
+        <iframe
+          src="https://s.tradingview.com/widgetembed/?symbol=FX_IDC%3AXAUUSD&interval=D&theme=light&style=1&locale=kr&toolbarbg=f1f3f6&hidetoptoolbar=1&hidesidetoolbar=1&hidelegend=1"
+          style="width:100%;height:260px;"
+          frameborder="0"
+          allowtransparency="true"
+          scrolling="no">
+        </iframe>
+      </div>
 
       <!-- WTI 원유 -->
       <div class="brand-card p-3">
@@ -136,30 +173,45 @@
 
     <div class="brand-divider mt-4"></div>
   </section>
-  <div class="brand-divider"></div>
-  <div id="news-container" class="space-y-4"></div>
+
+  <!-- 📰 뉴스 영역 -->
+  <section class="space-y-4">
+    <div id="news-container" class="space-y-6"></div>
+  </section>
+
 </main>
 
 <script>
+/* 🔥 피드: 국내/국외 '경제' 중심으로만 2개 */
 const feeds = {
-  "선 매니저":"https://news.google.com/rss/search?q="+encodeURIComponent('"Intuitive Machines" OR Tesla OR NVIDIA OR "UnitedHealth" OR IonQ OR "NuScale Power" OR Bitcoin OR "Alphabet A"')+"&hl=en-US&gl=US&ceid=US:en",
-  "홍 매니저":"https://news.google.com/rss/search?q="+encodeURIComponent('McDonald OR Figma OR Pfizer')+"&hl=en-US&gl=US&ceid=US:en",
-  "혁 매니저":"https://news.google.com/rss/search?q="+encodeURIComponent('유비케어 OR "SK바이오팜" OR 대한조선 OR 태성')+"&hl=ko&gl=KR&ceid=KR:ko",
-  "웨어러블":"https://news.google.com/rss/search?q="+encodeURIComponent('갤럭시워치 OR 애플워치 OR 가민 OR 핏빗 OR 스마트워치 OR 웨어러블기기')+"&hl=ko&gl=KR&ceid=KR:ko",
-  "주요 소식(국내)": "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko",
-  "주요 소식(국외)": "https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en"
+  "주요 경제 뉴스(국내)":
+    "https://news.google.com/rss/search?q=" +
+    encodeURIComponent("증시 OR 물가 OR 금리 OR 환율 OR 경기 OR 경제") +
+    "&hl=ko&gl=KR&ceid=KR:ko",
+
+  "주요 경제 뉴스(국외)":
+    "https://news.google.com/rss/search?q=" +
+    encodeURIComponent("global economy OR inflation OR interest rates OR stock market OR Fed") +
+    "&hl=en-US&gl=US&ceid=US:en"
 };
 
+/* 더보기 링크용 키워드(검색 페이지로 연결) */
 const CATEGORY_KEYWORDS = {
-  "선 매니저": ["Intuitive Machines","Tesla","NVIDIA","UnitedHealth","IonQ","NuScale Power","Bitcoin","Alphabet A"],
-  "홍 매니저": ["McDonald","Figma","Pfizer"],
-  "혁 매니저": ["유비케어","SK바이오팜","대한조선","태성"],
-  "웨어러블": ["갤럭시워치","애플워치","스마트워치","가민","핏빗","웨어러블기기"]
+  "주요 경제 뉴스(국내)": ["증시","물가","금리","환율","경기","경제"],
+  "주요 경제 뉴스(국외)": ["global economy","inflation","interest rates","stock market","Fed"]
 };
 
+/* '더보기' 클릭 시 보낼 기본 URL */
 const TOP_PAGE = {
-  "주요 소식(국내)": "https://news.google.com/topstories?hl=ko&gl=KR&ceid=KR:ko",
-  "주요 소식(국외)": "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"
+  "주요 경제 뉴스(국내)":
+    "https://news.google.com/search?q=" +
+    encodeURIComponent("증시 OR 물가 OR 금리 OR 환율 OR 경기 OR 경제") +
+    "&hl=ko&gl=KR&ceid=KR:ko",
+
+  "주요 경제 뉴스(국외)":
+    "https://news.google.com/search?q=" +
+    encodeURIComponent("global economy OR inflation OR interest rates OR stock market OR Fed") +
+    "&hl=en-US&gl=US&ceid=US:en"
 };
 
 function buildMoreLink(cat){
@@ -170,51 +222,85 @@ function buildMoreLink(cat){
   return `https://news.google.com/search?q=${q}&hl=ko&gl=KR&ceid=KR%3Ako`;
 }
 
-function parseYMD(v){const[a,b,c]=v.split("-").map(Number);return new Date(a,b-1,c);}
-function isSameDate(dt,sel){return Math.abs((new Date(dt)-parseYMD(sel))/86400000)<=1;}
+/* 날짜 처리 */
+function parseYMD(v){
+  const [a,b,c] = v.split("-").map(Number);
+  return new Date(a, b - 1, c);
+}
+function isSameDate(dt, sel){
+  return Math.abs((new Date(dt) - parseYMD(sel)) / 86400000) <= 1;
+}
 
+/* RSS → JSON */
 async function fetchRSS(u){
-  const r=await fetch("https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(u));
+  const r = await fetch(
+    "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(u)
+  );
   return r.json();
 }
 
-function renderSection(wrap,cat,items,selDate){
-  let num=0;
-  const sec=document.createElement("section");
-  sec.innerHTML=`<div class="flex justify-between items-center mb-2">
-    <h2 class="brand-section-title text-xl">${cat}</h2>
-    <a href="${buildMoreLink(cat)}" target="_blank"
-       class="px-3 py-1 bg-[var(--brand-primary)] text-white rounded-md text-sm hover:bg-[var(--brand-primary-700)] transition">더보기</a>
-  </div>`;
+/* 섹션 렌더링 */
+function renderSection(wrap, cat, items, selDate){
+  let num = 0;
+  const sec = document.createElement("section");
 
-  for(const it of items||[]){
-    if(num>=5) break;
-    if(!isSameDate(it.pubDate,selDate)) continue;
-    const clean=(it.description||"").replace(/<[^>]+>/g," ").slice(0,60);
-    sec.innerHTML+=`
+  sec.innerHTML = `
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="brand-section-title text-xl">${cat}</h2>
+      <a href="${buildMoreLink(cat)}" target="_blank"
+         class="px-3 py-1 bg-[var(--brand-primary)] text-white rounded-md text-sm hover:bg-[var(--brand-primary-700)] transition">
+        더보기
+      </a>
+    </div>
+  `;
+
+  for(const it of items || []){
+    if(num >= 5) break;
+    if(!isSameDate(it.pubDate, selDate)) continue;
+
+    const clean = (it.description || "").replace(/<[^>]+>/g," ").slice(0, 80);
+
+    sec.innerHTML += `
       <div class="brand-card p-4 mt-2">
-        <a class="brand-link block mb-1" href="${it.link}" target="_blank">${it.title}</a>
-        <p class="text-sm text-[var(--brand-muted)] brand-sub">${clean}...</p>
-      </div>`;
+        <a class="brand-link block mb-1" href="${it.link}" target="_blank">
+          ${it.title}
+        </a>
+        <p class="text-sm text-[var(--brand-muted)] brand-sub">
+          ${clean}...
+        </p>
+      </div>
+    `;
     num++;
   }
 
-  if(num===0) sec.innerHTML+=`<p class="brand-sub text-[var(--brand-muted)]">해당 날짜 소식 없음</p>`;
-  sec.innerHTML+=`<div class="brand-divider mt-4 mb-6"></div>`;
+  if(num === 0){
+    sec.innerHTML += `
+      <p class="brand-sub text-[var(--brand-muted)]">
+        해당 날짜의 경제 뉴스가 없어요. 날짜를 바꾸거나 더보기를 눌러보세요.
+      </p>
+    `;
+  }
+
+  sec.innerHTML += `<div class="brand-divider mt-4 mb-2"></div>`;
   wrap.appendChild(sec);
 }
 
+/* 전체 로드 */
 async function loadAllNews(){
-  const selDate=document.getElementById("datePicker").value;
-  const c=document.getElementById("news-container"); c.innerHTML="";
-  for(const [cat,url] of Object.entries(feeds)){
-    const d=await fetchRSS(url);
-    renderSection(c,cat,d.items,selDate);
+  const selDate = document.getElementById("datePicker").value;
+  const c = document.getElementById("news-container");
+  c.innerHTML = "";
+
+  for(const [cat, url] of Object.entries(feeds)){
+    const d = await fetchRSS(url);
+    renderSection(c, cat, d.items || [], selDate);
   }
 }
 
-window.onload=()=>{
-  document.getElementById("datePicker").value=new Date().toISOString().slice(0,10);
+/* 초기 로드 */
+window.onload = () => {
+  document.getElementById("datePicker").value =
+    new Date().toISOString().slice(0,10);
   loadAllNews();
 };
 </script>
