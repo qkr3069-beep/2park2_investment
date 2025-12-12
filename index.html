@@ -11,10 +11,13 @@
   --brand-primary:#0f3a3a;        /* 딥 틸 메인 컬러 */
   --brand-primary-700:#0a2b2b;    /* hover용 어두운 딥 틸 */
   --brand-primary-50:#f7f4ef;     /* 전체 배경 (아이보리/크림색) */
+
   --brand-text:#0f3a3a;           /* 기본 텍스트 */
   --brand-muted:#4b5e5e;          /* 보조 텍스트 */
+
   --brand-card:#ffffff;           /* 카드 배경 */
   --brand-divider:#e5e1d8;        /* 카드 구분선 */
+
   --brand-radius:14px;
   --brand-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
@@ -65,9 +68,8 @@
 <header class="brand-header text-white">
   <div class="max-w-6xl mx-auto px-5 py-5 flex flex-col lg:flex-row lg:justify-between gap-4">
     <div class="flex flex-col items-start gap-0 text-left">
-      <img src="2park2 investment_logo.png"
-     alt="이박이 인베스트먼트 로고"
-     class="h-20 md:h-24 lg:h-28 object-contain" />
+      <img src="https://postfiles.pstatic.net/MjAyNTEyMTJfMTkx/MDAxNzY1NDkzNTcyMjU2.1bZ5re6psVnRfzoWkLaaFobPFGdXVkRFo1vrO-ipQTsg.PJIK7jIWnHQtR6fIICNQE0djnE5LanmZ30-rCe6muIog.PNG/SE-559c5697-c455-41c6-ad8d-39f6f9a4ae4a.png?type=w966"
+           alt="이박이 인베스트먼트 로고" class="h-16 object-contain" />
       <div class="flex gap-3 items-center flex-wrap mt-1">
 	<h1 class="text-xl lg:text-2xl font-extrabold text-[#0A3A32]">이박이 인베스트먼트 뉴스 브리핑</h1>
         <a href="https://www.korea.kr/" target="_blank" rel="noopener" class="badge-link text-white font-bold text-sm">
@@ -85,6 +87,55 @@
 </header>
 
 <main class="max-w-6xl mx-auto px-5 py-4 space-y-5">
+  <section id="market-charts" class="space-y-4 mb-4">
+    <h2 class="brand-section-title text-xl">주요 시장 차트</h2>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <!-- 달러/원 -->
+      <div class="brand-card p-3">
+        <h3 class="font-bold mb-2 text-sm text-[var(--brand-muted)]">
+          달러/원 환율 (USD/KRW)
+        </h3>
+        <iframe
+          src="https://s.tradingview.com/widgetembed/?symbol=FX_IDC%3AUSDKRW&interval=D&theme=light&style=1&locale=kr&toolbarbg=f1f3f6&hidetoptoolbar=1&hidesidetoolbar=1&hidelegend=1"
+          style="width:100%;height:260px;"
+          frameborder="0"
+          allowtransparency="true"
+          scrolling="no">
+        </iframe>
+      </div>
+
+	<!-- 금 차트 -->
+	<div class="brand-card p-3">
+  	<h3 class="font-bold mb-2 text-sm text-[var(--brand-muted)]">
+    	금 시세 (XAU/USD)
+  	</h3>
+  	<iframe
+    	src="https://s.tradingview.com/widgetembed/?symbol=FX_IDC%3AXAUUSD&interval=D&theme=light&style=1&locale=kr&toolbarbg=f1f3f6&hidetoptoolbar=1&hidesidetoolbar=1&hidelegend=1"
+    	style="width:100%;height:260px;"
+    	frameborder="0"
+    	allowtransparency="true"
+    	scrolling="no">
+  	</iframe>
+	</div>
+
+      <!-- WTI 원유 -->
+      <div class="brand-card p-3">
+        <h3 class="font-bold mb-2 text-sm text-[var(--brand-muted)]">
+          WTI 원유 (Crude Oil)
+        </h3>
+        <iframe
+          src="https://s.tradingview.com/widgetembed/?symbol=TVC%3AUSOIL&interval=D&theme=light&style=1&locale=kr&toolbarbg=f1f3f6&hidetoptoolbar=1&hidesidetoolbar=1&hidelegend=1"
+          style="width:100%;height:260px;"
+          frameborder="0"
+          allowtransparency="true"
+          scrolling="no">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="brand-divider mt-4"></div>
+  </section>
   <div class="brand-divider"></div>
   <div id="news-container" class="space-y-4"></div>
 </main>
