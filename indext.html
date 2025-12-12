@@ -58,35 +58,28 @@
 </main>
 
 <script>
+// ✅ q는 인코딩하지 않고, 전체 URL만 나중에 한 번 인코딩
 const feeds = {
   "선 매니저":
-    "https://news.google.com/rss/search?q=" +
-    encodeURIComponent(
-      '"Intuitive Machines" OR Tesla OR NVIDIA OR "UnitedHealth" OR IonQ OR "NuScale Power" OR Bitcoin OR "Alphabet A"'
-    ) +
-    "&hl=en-US&gl=US&ceid=US:en",
+    'https://news.google.com/rss/search?q="Intuitive Machines" OR Tesla OR NVIDIA OR "UnitedHealth" OR IonQ OR "NuScale Power" OR Bitcoin OR "Alphabet A"&hl=en-US&gl=US&ceid=US:en',
+
   "홍 매니저":
-    "https://news.google.com/rss/search?q=" +
-    encodeURIComponent(
-      'Tesla OR "Intuitive Machines" OR McDonald OR Figma OR Pfizer'
-    ) +
-    "&hl=en-US&gl=US&ceid=US:en",
+    'https://news.google.com/rss/search?q=McDonald OR Figma OR Pfizer&hl=en-US&gl=US&ceid=US:en',
+
   "혁 매니저":
-    "https://news.google.com/rss/search?q=" +
-    encodeURIComponent('유비케어 OR "SK바이오팜" OR 대한조선 OR 태성') +
-    "&hl=ko&gl=KR&ceid=KR:ko",
+    'https://news.google.com/rss/search?q=유비케어 OR "SK바이오팜" OR 대한조선 OR 태성&hl=ko&gl=KR&ceid=KR:ko',
+
   "웨어러블":
-    "https://news.google.com/rss/search?q=" +
-    encodeURIComponent('갤럭시워치 OR 애플워치 OR 가민 OR 핏빗 OR 스마트워치 OR 웨어러블기기') +
-    "&hl=ko&gl=KR&ceid=KR:ko",
+    'https://news.google.com/rss/search?q=갤럭시워치 OR 애플워치 OR 가민 OR 핏빗 OR 스마트워치 OR 웨어러블기기&hl=ko&gl=KR&ceid=KR:ko',
+
   "주요 소식(국내)": "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko",
   "주요 소식(국외)": "https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en"
 };
 
 
 const CATEGORY_KEYWORDS = {
-  "선 매니저": ["intuitive machines","TESLA","NVIDIA","unitedhealthcare","ionq","newscale power","bitcoin","alphabet a"],
-  "홍 매니저": ["mcdonald","figma","pfizer"],
+  "선 매니저": ["Intuitive Machines","Tesla","NVIDIA","UnitedHealth","IonQ","NuScale Power","Bitcoin","Alphabet A"],
+  "홍 매니저": ["McDonald","Figma","Pfizer"],
   "혁 매니저": ["유비케어","SK바이오팜","대한조선","태성"],
   "웨어러블": ["갤럭시워치","애플워치","스마트워치","핏빗","웨어러블기기"]
 };
@@ -100,7 +93,7 @@ function buildMoreLink(cat){
   if (TOP_PAGE[cat]) return TOP_PAGE[cat];
   const terms = CATEGORY_KEYWORDS[cat];
   if (!terms) return "#";
-  const q = terms.map(t=>`%22${encodeURIComponent(t)}%22`).join("%20OR%20");
+  const q = encodeURIComponent(terms.join(" OR "));
   return `https://news.google.com/search?q=${q}&hl=ko&gl=KR&ceid=KR%3Ako`;
 }
 
@@ -108,24 +101,32 @@ function parseYMD(v){const[a,b,c]=v.split("-").map(Number);return new Date(a,b-1
 function isSameDate(dt,sel){return Math.abs((new Date(dt)-parseYMD(sel))/86400000)<=1;}
 
 async function fetchRSS(u){
-  const r=await fetch("https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(u));
+  const r = await fetch(
+    "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(u)
+  );
   return r.json();
 }
 
 function renderSection(wrap,cat,items,selDate){
-  let num=0;
-  const sec=document.createElement("section");
-  sec.innerHTML=`<div class="flex justify-between items-center mb-2">
-    <h2 class="brand-section-title text-xl">${cat}</h2>
-    <a href="${buildMoreLink(cat)}" target="_blank"
-       class="px-3 py-1 bg-[var(--brand-primary)] text-white rounded-md text-sm hover:bg-[var(--brand-primary-700)] transition">더보기</a>
-  </div>`;
+  const sec = document.createElement("section");
+  sec.innerHTML = `
+    <div class="flex justify-between items-center mb-2">
+      <h2 class="brand-section-title text-xl">${cat}</h2>
+      <a href="${buildMoreLink(cat)}" target="_blank"
+         class="px-3 py-1 bg-[var(--brand-primary)] text-white rounded-md text-sm hover:bg-[var(--brand-primary-700)] transition">
+        더보기
+      </a>
+    </div>`;
 
-  for(const it of items||[]){
-    if(num>=5) break;
-    if(!isSameDate(it.pubDate,selDate)) continue;
-    const clean=(it.description||"").replace(/<[^>]+>/g," ").slice(0,60);
-    sec.innerHTML+=`
+const list = items || [];
+const filtered = list.filter(it => isSameDate(it.pubDate, selDate));
+const finalItems = filtered.length > 0 ? filtered : list.slice(0, 5);
+
+  let num = 0;
+  for(const it of finalItems){
+    if(num >= 5) break;
+    const clean = (it.description || "").replace(/<[^>]+>/g," ").slice(0,60);
+    sec.innerHTML += `
       <div class="brand-card p-4 mt-2">
         <a class="brand-link block mb-1" href="${it.link}" target="_blank">${it.title}</a>
         <p class="text-sm brand-sub">${clean}...</p>
@@ -133,22 +134,26 @@ function renderSection(wrap,cat,items,selDate){
     num++;
   }
 
-  if(num===0) sec.innerHTML+=`<p class="brand-sub">해당 날짜 소식 없음</p>`;
-  sec.innerHTML+=`<div class="brand-divider mt-4 mb-6"></div>`;
+  if(num === 0){
+    sec.innerHTML += `<p class="brand-sub">해당 날짜 소식 없음</p>`;
+  }
+
+  sec.innerHTML += `<div class="brand-divider mt-4 mb-6"></div>`;
   wrap.appendChild(sec);
 }
 
 async function loadAllNews(){
-  const selDate=document.getElementById("datePicker").value;
-  const c=document.getElementById("news-container"); c.innerHTML="";
+  const selDate = document.getElementById("datePicker").value;
+  const c = document.getElementById("news-container"); 
+  c.innerHTML = "";
   for(const [cat,url] of Object.entries(feeds)){
-    const d=await fetchRSS(url);
+    const d = await fetchRSS(url);
     renderSection(c,cat,d.items,selDate);
   }
 }
 
-window.onload=()=>{
-  document.getElementById("datePicker").value=new Date().toISOString().slice(0,10);
+window.onload = () => {
+  document.getElementById("datePicker").value = new Date().toISOString().slice(0,10);
   loadAllNews();
 };
 </script>
