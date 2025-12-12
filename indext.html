@@ -7,28 +7,60 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
   <style>
-    :root{
-      --brand-primary:#1f4fff;
-      --brand-primary-700:#1a3fd1;
-      --brand-primary-50:#eef2ff;
-      --brand-text:#0f172a;
-      --brand-muted:#64748b;
-      --brand-card:#ffffff;
-      --brand-divider:#e5e7eb;
-      --brand-radius:14px;
-      --brand-shadow:0 6px 18px rgba(31,79,255,0.08);
-    }
+   :root{
+  --brand-primary:#0f3a3a;        /* 딥 틸 메인 컬러 */
+  --brand-primary-700:#0a2b2b;    /* hover용 어두운 딥 틸 */
+  --brand-primary-50:#f7f4ef;     /* 전체 배경 (아이보리/크림색) */
+
+  --brand-text:#0f3a3a;           /* 기본 텍스트 */
+  --brand-muted:#4b5e5e;          /* 보조 텍스트 */
+
+  --brand-card:#ffffff;           /* 카드 배경 */
+  --brand-divider:#e5e1d8;        /* 카드 구분선 */
+
+  --brand-radius:14px;
+  --brand-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
     html,body{
       font-family:"Pretendard Variable",Pretendard,sans-serif;
     }
-    .brand-header{background:linear-gradient(90deg,var(--brand-primary),var(--brand-primary-700));}
-    .brand-btn{background:var(--brand-primary);color:#fff;padding:10px 18px;border-radius:9999px;font-weight:700;}
-    .brand-section-title{font-weight:800;border-left:6px solid var(--brand-primary);padding-left:10px;}
-    .brand-card{background:white;border-radius:var(--brand-radius);box-shadow:var(--brand-shadow);}
-    .brand-link{color:var(--brand-primary);font-weight:700;}
-    .badge-link{background:#ffffff2B;padding:6px 10px;border-radius:9999px;}
-    .brand-divider{border-top:1px dashed var(--brand-divider);}
-    input[type="date"]{color:black;}
+   .brand-header{
+  background:#F7F3ED; /* 아이보리 배경 */
+}
+    .brand-btn{
+      background:var(--brand-primary);
+      color:#f9fafb;
+      padding:10px 18px;
+      border-radius:9999px;
+      font-weight:700;
+    }
+    .brand-section-title{
+  font-weight:800;
+  border-left:6px solid var(--brand-primary);
+  padding-left:10px;
+}
+    .brand-card{
+      background:var(--brand-card);
+      border-radius:var(--brand-radius);
+      box-shadow:var(--brand-shadow);
+      border:1px solid #111827;
+    }
+    .brand-link{
+      color:#22c55e;                 /* 링크 텍스트: 연녹 포인트 */
+      font-weight:700;
+    }
+    .badge-link{
+      background:#22c55e33;          /* 살짝 투명한 연녹 배지 */
+      padding:6px 10px;
+      border-radius:9999px;
+      color:#f9fafb;
+    }
+    .brand-divider{
+      border-top:1px dashed var(--brand-divider);
+    }
+    input[type="date"]{
+      color:black;
+    }
   </style>
 </head>
 <body class="bg-[var(--brand-primary-50)] text-[var(--brand-text)] min-h-screen">
@@ -38,8 +70,8 @@
     <div class="flex flex-col items-start gap-0 text-left">
       <img src="https://postfiles.pstatic.net/MjAyNTEyMTJfMTkx/MDAxNzY1NDkzNTcyMjU2.1bZ5re6psVnRfzoWkLaaFobPFGdXVkRFo1vrO-ipQTsg.PJIK7jIWnHQtR6fIICNQE0djnE5LanmZ30-rCe6muIog.PNG/SE-559c5697-c455-41c6-ad8d-39f6f9a4ae4a.png?type=w966"
            alt="이박이 인베스트먼트 로고" class="h-16 object-contain" />
-      <div class="flex gap-3 items-center flex-wrap">
-        <h1 class="text-xl lg:text-2xl font-extrabold">이박이 인베스트먼트 뉴스 브리핑</h1>
+      <div class="flex gap-3 items-center flex-wrap mt-1">
+	<h1 class="text-xl lg:text-2xl font-extrabold text-[#0A3A32]">이박이 인베스트먼트 뉴스 브리핑</h1>
         <a href="https://www.korea.kr/" target="_blank" rel="noopener" class="badge-link text-white font-bold text-sm">
           정책브리핑 바로가기
         </a>
@@ -47,7 +79,9 @@
     </div>
     <div class="flex items-center gap-3">
       <input type="date" id="datePicker" class="px-3 py-2 rounded-xl bg-white text-black" />
-      <button onclick="loadAllNews()" class="brand-btn">조회</button>
+      <button onclick="loadAllNews()" class="brand-btn hover:bg-[var(--brand-primary-700)] transition">
+        조회
+      </button>
     </div>
   </div>
 </header>
@@ -58,30 +92,20 @@
 </main>
 
 <script>
-// ✅ q는 인코딩하지 않고, 전체 URL만 나중에 한 번 인코딩
 const feeds = {
-  "선 매니저":
-    'https://news.google.com/rss/search?q="Intuitive Machines" OR Tesla OR NVIDIA OR "UnitedHealth" OR IonQ OR "NuScale Power" OR Bitcoin OR "Alphabet A"&hl=en-US&gl=US&ceid=US:en',
-
-  "홍 매니저":
-    'https://news.google.com/rss/search?q=McDonald OR Figma OR Pfizer&hl=en-US&gl=US&ceid=US:en',
-
-  "혁 매니저":
-    'https://news.google.com/rss/search?q=유비케어 OR "SK바이오팜" OR 대한조선 OR 태성&hl=ko&gl=KR&ceid=KR:ko',
-
-  "웨어러블":
-    'https://news.google.com/rss/search?q=갤럭시워치 OR 애플워치 OR 가민 OR 핏빗 OR 스마트워치 OR 웨어러블기기&hl=ko&gl=KR&ceid=KR:ko',
-
+  "선 매니저":"https://news.google.com/rss/search?q="+encodeURIComponent('"Intuitive Machines" OR Tesla OR NVIDIA OR "UnitedHealth" OR IonQ OR "NuScale Power" OR Bitcoin OR "Alphabet A"')+"&hl=en-US&gl=US&ceid=US:en",
+  "홍 매니저":"https://news.google.com/rss/search?q="+encodeURIComponent('McDonald OR Figma OR Pfizer')+"&hl=en-US&gl=US&ceid=US:en",
+  "혁 매니저":"https://news.google.com/rss/search?q="+encodeURIComponent('유비케어 OR "SK바이오팜" OR 대한조선 OR 태성')+"&hl=ko&gl=KR&ceid=KR:ko",
+  "웨어러블":"https://news.google.com/rss/search?q="+encodeURIComponent('갤럭시워치 OR 애플워치 OR 가민 OR 핏빗 OR 스마트워치 OR 웨어러블기기')+"&hl=ko&gl=KR&ceid=KR:ko",
   "주요 소식(국내)": "https://news.google.com/rss?hl=ko&gl=KR&ceid=KR:ko",
   "주요 소식(국외)": "https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en"
 };
-
 
 const CATEGORY_KEYWORDS = {
   "선 매니저": ["Intuitive Machines","Tesla","NVIDIA","UnitedHealth","IonQ","NuScale Power","Bitcoin","Alphabet A"],
   "홍 매니저": ["McDonald","Figma","Pfizer"],
   "혁 매니저": ["유비케어","SK바이오팜","대한조선","태성"],
-  "웨어러블": ["갤럭시워치","애플워치","스마트워치","핏빗","웨어러블기기"]
+  "웨어러블": ["갤럭시워치","애플워치","스마트워치","가민","핏빗","웨어러블기기"]
 };
 
 const TOP_PAGE = {
@@ -93,7 +117,7 @@ function buildMoreLink(cat){
   if (TOP_PAGE[cat]) return TOP_PAGE[cat];
   const terms = CATEGORY_KEYWORDS[cat];
   if (!terms) return "#";
-  const q = encodeURIComponent(terms.join(" OR "));
+  const q = terms.map(t=>`%22${encodeURIComponent(t)}%22`).join("%20OR%20");
   return `https://news.google.com/search?q=${q}&hl=ko&gl=KR&ceid=KR%3Ako`;
 }
 
@@ -101,59 +125,47 @@ function parseYMD(v){const[a,b,c]=v.split("-").map(Number);return new Date(a,b-1
 function isSameDate(dt,sel){return Math.abs((new Date(dt)-parseYMD(sel))/86400000)<=1;}
 
 async function fetchRSS(u){
-  const r = await fetch(
-    "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(u)
-  );
+  const r=await fetch("https://api.rss2json.com/v1/api.json?rss_url="+encodeURIComponent(u));
   return r.json();
 }
 
 function renderSection(wrap,cat,items,selDate){
-  const sec = document.createElement("section");
-  sec.innerHTML = `
-    <div class="flex justify-between items-center mb-2">
-      <h2 class="brand-section-title text-xl">${cat}</h2>
-      <a href="${buildMoreLink(cat)}" target="_blank"
-         class="px-3 py-1 bg-[var(--brand-primary)] text-white rounded-md text-sm hover:bg-[var(--brand-primary-700)] transition">
-        더보기
-      </a>
-    </div>`;
+  let num=0;
+  const sec=document.createElement("section");
+  sec.innerHTML=`<div class="flex justify-between items-center mb-2">
+    <h2 class="brand-section-title text-xl">${cat}</h2>
+    <a href="${buildMoreLink(cat)}" target="_blank"
+       class="px-3 py-1 bg-[var(--brand-primary)] text-white rounded-md text-sm hover:bg-[var(--brand-primary-700)] transition">더보기</a>
+  </div>`;
 
-const list = items || [];
-const filtered = list.filter(it => isSameDate(it.pubDate, selDate));
-const finalItems = filtered.length > 0 ? filtered : list.slice(0, 5);
-
-  let num = 0;
-  for(const it of finalItems){
-    if(num >= 5) break;
-    const clean = (it.description || "").replace(/<[^>]+>/g," ").slice(0,60);
-    sec.innerHTML += `
+  for(const it of items||[]){
+    if(num>=5) break;
+    if(!isSameDate(it.pubDate,selDate)) continue;
+    const clean=(it.description||"").replace(/<[^>]+>/g," ").slice(0,60);
+    sec.innerHTML+=`
       <div class="brand-card p-4 mt-2">
         <a class="brand-link block mb-1" href="${it.link}" target="_blank">${it.title}</a>
-        <p class="text-sm brand-sub">${clean}...</p>
+        <p class="text-sm text-[var(--brand-muted)] brand-sub">${clean}...</p>
       </div>`;
     num++;
   }
 
-  if(num === 0){
-    sec.innerHTML += `<p class="brand-sub">해당 날짜 소식 없음</p>`;
-  }
-
-  sec.innerHTML += `<div class="brand-divider mt-4 mb-6"></div>`;
+  if(num===0) sec.innerHTML+=`<p class="brand-sub text-[var(--brand-muted)]">해당 날짜 소식 없음</p>`;
+  sec.innerHTML+=`<div class="brand-divider mt-4 mb-6"></div>`;
   wrap.appendChild(sec);
 }
 
 async function loadAllNews(){
-  const selDate = document.getElementById("datePicker").value;
-  const c = document.getElementById("news-container"); 
-  c.innerHTML = "";
+  const selDate=document.getElementById("datePicker").value;
+  const c=document.getElementById("news-container"); c.innerHTML="";
   for(const [cat,url] of Object.entries(feeds)){
-    const d = await fetchRSS(url);
+    const d=await fetchRSS(url);
     renderSection(c,cat,d.items,selDate);
   }
 }
 
-window.onload = () => {
-  document.getElementById("datePicker").value = new Date().toISOString().slice(0,10);
+window.onload=()=>{
+  document.getElementById("datePicker").value=new Date().toISOString().slice(0,10);
   loadAllNews();
 };
 </script>
